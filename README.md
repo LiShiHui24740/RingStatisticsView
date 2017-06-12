@@ -2,6 +2,10 @@
 ### 环形百分比统计图,不多说先上图  
 ![github](https://github.com/LiShiHui24740/RingStatisticsView/blob/master/Simple/img/1.jpg)  
 ![github](https://github.com/LiShiHui24740/RingStatisticsView/blob/master/Simple/img/2.jpg)
+# gradle
+```
+compile 'com.ebanswers:ringstatisticsview:1.0'
+```
 # 使用  
 ```
 //在布局中
@@ -17,7 +21,7 @@
         
 //在Activity中
 RingStatisticsView ringStatisticsView = (RingStatisticsView) findViewById(R.id.id_rsv);
-        ringStatisticsView.setPercentAndColors(new float[]{0.2f,0.2f,0.3f,0.3f},new int[]{Color.parseColor("#F9AA28"),         Color.parseColor("#009752"), Color.parseColor("#2EC1FB"), Color.parseColor("#FA6723")});
+        ringStatisticsView.setPercentAndColors(new float[]{0.2f,0.2f,0.3f,0.3f},new int[]{Color.parseColor("#F9AA28"),Color.parseColor("#009752"), Color.parseColor("#2EC1FB"), Color.parseColor("#FA6723")});
         ringStatisticsView.refresh();
 ```
 # 自定义属性说明  

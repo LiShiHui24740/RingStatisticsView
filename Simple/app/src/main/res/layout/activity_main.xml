@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,8 +10,14 @@
     >
 
     <com.ebanswers.lsh.RingStatisticsView
+        android:id="@+id/id_rsv"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        app:rsv_CenterNumber="5000"
+        app:rsv_CenterText="工资"
+        app:rsv_CenterTextColor="#ff0000"
+        app:rsv_CenterNumberColor="#11ddff"
         />
+
 
 </LinearLayout>

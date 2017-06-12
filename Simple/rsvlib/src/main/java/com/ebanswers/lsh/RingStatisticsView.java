@@ -1,6 +1,7 @@
 package com.ebanswers.lsh;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -21,29 +22,68 @@ public class RingStatisticsView extends View {
     private float[] mPercent = new float[]{0.1f, 0.2f, 0.3f, 0.4f};
     private int[] mColors = new int[]{Color.parseColor("#F9AA28"), Color.parseColor("#009752"), Color.parseColor("#2EC1FB"), Color.parseColor("#FA6723")};
     private Paint mPaint, mLinePaint, mPathPaint;
-    private float mRingWidth = 30;
-    private int textSize1 = 15, textSize2 = 18, textSize3 = 15;
+    private static final int DEFAULT_RINGWIDTH = 8;
+    private static final int DEFAULT_TEXTSIZE1 = 15;
+    private static final int DEFAULT_TEXTSIZE2 = 18;
+    private static final int DEFAULT_TEXTSIZE3 = 15;
+    private static final String DEFAULT_CENTER_TEXT = "总资产";
+    private float mRingWidth = 0;
+    private int textSize1 = 0, textSize2 = 0, textSize3 = 0;
     private TextPaint mTextPaint;
     private int mTextColor1 = Color.parseColor("#BBB9B8"), mTextColor2 = Color.parseColor("#FC824B");
     private RectF mRectF;
-    private String mstr_total_text = "总资产";
+    private String mstr_total_text = DEFAULT_CENTER_TEXT;
     private String mstr_total_number = "10000.00";
     private int width, height;
     private int radius;
 
     public RingStatisticsView(Context context) {
         super(context);
+        initSize(context);
         init();
     }
 
     public RingStatisticsView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initAttr(context, attrs);
+        initSize(context);
         init();
     }
 
     public RingStatisticsView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initAttr(context, attrs);
+        initSize(context);
         init();
+    }
+
+    private void initAttr(Context context, AttributeSet attrs) {
+        if (attrs == null) {
+            return;
+        }
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RingStatisticsView);
+        int n = array.getIndexCount();
+        for (int i = 0; i < n; i++) {
+            int attr = array.getIndex(i);
+            if (attr == R.styleable.RingStatisticsView_rsv_RingWidth) {
+                mRingWidth = array.getInt(attr, dp2px(context, DEFAULT_RINGWIDTH));
+            } else if (attr == R.styleable.RingStatisticsView_rsv_CenterText) {
+                mstr_total_text = array.getString(attr);
+            } else if (attr == R.styleable.RingStatisticsView_rsv_CenterNumber) {
+                mstr_total_number = array.getString(attr);
+            } else if (attr == R.styleable.RingStatisticsView_rsv_CenterTextColor) {
+                mTextColor1 = array.getColor(attr, Color.parseColor("#BBB9B8"));
+            } else if (attr == R.styleable.RingStatisticsView_rsv_CenterNumberColor) {
+                mTextColor2 = array.getColor(attr, Color.parseColor("#FC824B"));
+            } else if (attr == R.styleable.RingStatisticsView_rsv_CenterTextSize) {
+                textSize1 = array.getDimensionPixelSize(attr, sp2px(context, DEFAULT_TEXTSIZE1));
+            } else if (attr == R.styleable.RingStatisticsView_rsv_CenterNumberSize) {
+                textSize2 = array.getDimensionPixelSize(attr, sp2px(context, DEFAULT_TEXTSIZE2));
+            } else if (attr == R.styleable.RingStatisticsView_rsv_PercentTextSize) {
+                textSize3 = array.getDimensionPixelSize(attr, sp2px(context, DEFAULT_TEXTSIZE3));
+            }
+        }
+        array.recycle();
     }
 
     private void init() {
@@ -64,6 +104,32 @@ public class RingStatisticsView extends View {
         mRectF = new RectF();
 
     }
+
+    private void initSize(Context context) {
+        if (mRingWidth == 0) {
+            mRingWidth = dp2px(context, dp2px(context, DEFAULT_RINGWIDTH));
+        }
+        if (textSize1 == 0) {
+            textSize1 = sp2px(context, DEFAULT_TEXTSIZE1);
+        }
+        if (textSize2 == 0) {
+            textSize2 = sp2px(context, DEFAULT_TEXTSIZE2);
+        }
+        if (textSize3 == 0) {
+            textSize3 = sp2px(context, DEFAULT_TEXTSIZE3);
+        }
+    }
+
+    private int sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
+    private int dp2px(Context context, float dpValue) {
+        final float densityScale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * densityScale + 0.5f);
+    }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

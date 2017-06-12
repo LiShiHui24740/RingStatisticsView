@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RingStatisticsView">
+        <attr name="rsv_RingWidth" format="reference|dimension"/>
+        <attr name="rsv_CenterText" format="reference|string"/>
+        <attr name="rsv_CenterNumber" format="reference|string"/>
+        <attr name="rsv_CenterTextColor" format="reference|color"/>
+        <attr name="rsv_CenterNumberColor" format="reference|color"/>
+        <attr name="rsv_CenterTextSize" format="reference|dimension"/>
+        <attr name="rsv_CenterNumberSize" format="reference|dimension"/>
+        <attr name="rsv_PercentTextSize" format="reference|dimension"/>
+    </declare-styleable>
+
+</resources>

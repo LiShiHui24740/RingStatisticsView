@@ -14,8 +14,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 /**
- * @author
- * Created by lishihui on 2016/12/26.
+ * @author Created by lishihui on 2016/12/26.
  */
 
 public class RingStatisticsView extends View {
@@ -90,8 +89,8 @@ public class RingStatisticsView extends View {
         float angle = 0f;
         float startX, startY, centerX, centerY, endX, endY, textX;
         int mCount = mPercent.length;
-		mPaint.setStrokeWidth(mRingWidth);
-		mLinePaint.setStrokeWidth(mRingWidth);
+        mPaint.setStrokeWidth(mRingWidth);
+        mLinePaint.setStrokeWidth(mRingWidth);
         for (int i = 0; i < mCount; i++) {
             mPaint.setColor(mColors[i]);
             startAngle += sweepAngle;
@@ -134,7 +133,7 @@ public class RingStatisticsView extends View {
             DecimalFormat df = new DecimalFormat("######0.0");
             BigDecimal b = new BigDecimal(mPercent[i] * 100);
             double f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-            String percent = df.format(f1)+ "%";
+            String percent = df.format(f1) + "%";
             float text_width = mTextPaint.measureText(percent);
             mTextPaint.setColor(mColors[i]);
             mTextPaint.setTextSize(textSize3);
